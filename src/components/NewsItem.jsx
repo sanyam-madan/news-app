@@ -3,10 +3,13 @@ import { Component } from "react";
 export class NewsItem extends Component {
   
   render() {
-    let {title,description,ImageUrl,newsUrl, author, date}= this.props
+    let {title,description,ImageUrl,newsUrl, author, date , source}= this.props
     return (
       <div>
-        <div className="card">
+        <div className="card"> 
+          <div>
+            <span className = "badge rounded-pill bg-danger" style={{display:'flex' , justifyContent: 'flex-end',position:'absolute', right:'0' }}>{source} </span>
+          </div>
           <img src={ImageUrl?ImageUrl:"https://platform.theverge.com/wp-content/uploads/sites/2/2025/09/257981_Techwoven_AJohnson_0002.jpg?quality=90&strip=all&crop=0%2C10.723165084465%2C100%2C78.55366983107&w=1200"} className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>

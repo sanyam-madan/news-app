@@ -249,17 +249,21 @@ export class News extends Component {
     document.title = `NewsMonkey - ${this.capitalizeFirstLetter(this.props.category)}`;
   }
   async updateNews() {
-
+    this.props.setProgress(10);
+    
     const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=5f19e5e69ff044d4b22df64f003b5302&page=${this.state.page}&pageSize=${this.props.pageSize}`
     this.setState({ loading: true })
     let data = await fetch(url)
+    this.props.setProgress(30);
     let parsedData = await data.json()
+    this.props.setProgress(70);
     console.log(parsedData)
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false
     })
+    this.props.setProgress(100);
   }
   async componentDidMount() {
     //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apikey=5f19e5e69ff044d4b22df64f003b5302&page=1&pageSize=${this.props.pageSize}`
@@ -354,6 +358,7 @@ export class News extends Component {
                 newsUrl={element.url}
                 author={element.author}
                 date={element.publishedAt}
+                source = {element.source.name}
               />
             </div>;
           })}
